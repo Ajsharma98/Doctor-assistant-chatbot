@@ -15,15 +15,15 @@ llm = HuggingFaceEndpoint(
     top_p=0.9,
     max_new_tokens=200,
     huggingfacehub_api_token=HF_TOKEN,
-    stop_sequences=["User query:"]
+    stop_sequences=["Doctor’s query:", "Doctor's query:", "Output:"]
 )
 
 # 3. Stronger, clearer prompt
-prompt_text = """You are a helpful assistant.
-Your task is to generate 4 distinct paraphrases of the user's query.
-Each paraphrase must keep the same meaning but use different phrasing.
+prompt_text = """You are a senior clinical language assistant helping a doctor communicate precisely.
+Your only task is to rephrase the doctor’s medical query into four distinct, professional variants.
+Do not explain or show code. Do not reference APIs, engines, or systems.
 
-Write exactly four paraphrased versions, each on a new line, numbered 1 to 4.
+Now produce four paraphrased versions in English, each medically appropriate and similar in length.
 
 Example:
 User query: "what is AI"
@@ -34,7 +34,7 @@ Output:
 4. What does the term AI refer to?
 
 Now do the same for the following:
-User query: "{user_query}"
+Doctor’s query: "{user_query}"
 Output:
 """
 
